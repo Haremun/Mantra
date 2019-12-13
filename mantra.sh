@@ -2,7 +2,7 @@
 # Author: Kamil Bieganski
 
 NAME=${1:-"my-app"}
-GROUP=${2:-"com.epam"}
+GROUP=${2:-"com.bieganski"}
 GROUP_PATH="${GROUP//.//}"
 VERSION=${3:-"0.1"}
 FOLDER_STRUCTURE="$NAME"/src/{main,test}/java/"$GROUP_PATH"/"$NAME" 
@@ -18,9 +18,10 @@ touch "$NAME"/src/test/java/"$GROUP_PATH"/AppTest.java
 echo "Generating pom.xml.."
 
 curl -L -s https://raw.githubusercontent.com/Haremun/Mantra/master/pom.xml > "$NAME"/pom.xml
-sed -i s/com.mycompany.app/"$GROUP"/g "$NAME"/pom.xml
+#sed -i s/com.mycompany.app/"$GROUP"/g "$NAME"/pom.xml
 sed -i s/my-app/"$NAME"/g "$NAME"/pom.xml
 sed -i s/1.0-SNAPSHOT/"$VERSION"/g "$NAME"/pom.xml
+sed -i s/#GROUP/"$GROUP"/g "$NAME"/pom.xml
 
 echo "Generating readme.md.."
 
