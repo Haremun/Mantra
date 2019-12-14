@@ -1,5 +1,5 @@
 #!/bin/bash
-# Author: Kamil Bieganski
+#Author: Kamil Bieganski
 
 NAME=${1:-"my-app"}
 GROUP=${2:-"com.bieganski"}
@@ -26,7 +26,7 @@ sed -i s/1.0-SNAPSHOT/"$VERSION"/g "$NAME"/pom.xml
 sed -i s/#GROUP/"$GROUP"/g "$NAME"/pom.xml
 sed -i s/#ARTI/"$ARTIFACT"/g "$NAME"/pom.xml
 
-echo "Generating readme.md.."
+echo "Generating readme.adoc.."
 
 cat << EOF > "$NAME"/readme.adoc
 Title: $NAME
@@ -40,6 +40,26 @@ To run project you have to use:
 
 To build project simply run "mvn package" command, to make it work run "java -cp target/$NAME-$VERSION.jar $GROUP.$NAME"
 EOF
+cat << EOF > "$NAME"/src/main/java/"$GROUP_PATH"/App.java
+package $GROUP;
+
+public class App{
+	public static void main(String[] args){
+		System.out.println("Hello world!");
+	}
+}
+EOF
+cat << EOF > "$NAME"/src/test/java/"$GROUP_PATH"/AppTest.java
+package $GROUP;
+
+import org.testng.annotations.Test;
+
+@Test
+public class AppTest{
+
+}
+EOF
+
 
 echo "Generating .gitignore.."
 
