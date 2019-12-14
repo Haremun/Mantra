@@ -5,6 +5,8 @@ NAME=${1:-"my-app"}
 GROUP=${2:-"com.bieganski"}
 GROUP_PATH="${GROUP//.//}"
 VERSION=${3:-"0.1"}
+ARTIFACT=`echo "$NAME" | sed 's/\([a-z0-9]\)\([A-Z]\)/\L\1-\L\2/g; s/\s/-/g' | tr '[:upper:]' '[:lower:]'`
+echo $ARTIFACT
 FOLDER_STRUCTURE="$NAME"/src/{main,test}/java/"$GROUP_PATH"/"$NAME" 
 
 echo "Generating project $NAME with groupId $GROUP, version $VERSION.."
@@ -22,7 +24,7 @@ curl -L -s https://raw.githubusercontent.com/Haremun/Mantra/master/pom.xml > "$N
 sed -i s/#NAME/"$NAME"/g "$NAME"/pom.xml
 sed -i s/1.0-SNAPSHOT/"$VERSION"/g "$NAME"/pom.xml
 sed -i s/#GROUP/"$GROUP"/g "$NAME"/pom.xml
-sed -i s/#ARTI/"$NAME"/g "$NAME"/pom.xml
+sed -i s/#ARTI/"$ARTIFACT"/g "$NAME"/pom.xml
 
 echo "Generating readme.md.."
 
@@ -45,6 +47,7 @@ curl -L -s http://gitignore.io/api/java,linux,maven,intellij > "$NAME"/.gitignor
 echo "*.class" >> "$NAME"/.gitignore
 echo "*.swp" >> "$NAME"/.gitignore
 echo ".idea" >> "$NAME"/.gitignore
+echo ".iml" >> "$NAME"/.gitignore
 
 echo "Project generated succesfully."
 echo "Initializing git repository and creating first commit.."
