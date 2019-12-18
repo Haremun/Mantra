@@ -59,7 +59,7 @@
           <configuration>
             <archive>
               <manifest>
-                <mainClass>#GROUP.App</mainClass>
+                <mainClass>#GROUP.#ARTI.App</mainClass>
               </manifest>
             </archive>
           </configuration>
