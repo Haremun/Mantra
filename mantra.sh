@@ -27,21 +27,26 @@ sed -i s/#ARTI/"$ARTIFACT"/g "$NAME"/pom.xml
 echo "Generating readme.adoc.."
 
 cat << EOF > "$NAME"/readme.adoc
-Title: $NAME
-Author: Kamil Bieganski
-Version: $VERSION
+= $NAME
+
+_Author: Kamil Biegański_
 
 To run project you have to use:
-- bash or other compatible unix shell
-- jdk version $(java --version | head -n 1)
-- maven version $(mvn -v | head -n 1 | grep -o '[0-9]\\.[0-9]\\.[0-9]')
 
-To build project simply run "mvn package" command, to make it work run "java -cp target/$NAME-$VERSION.jar $GROUP.$NAME"
+- jdk version 11+
+- maven version 3.6.2+
+
+=== Building
+    mvn package
+
+=== Running application
+
+    java -jar target/$ARTIFACT-?.?.jar
 EOF
 cat << EOF > "$NAME"/src/main/java/"$GROUP_PATH"/"$ARTIFACT"/App.java
 package $GROUP.$ARTIFACT;
 
-public class App{
+public class Main{
 	public static void main(String[] args){
 		System.out.println("Hello world!");
 	}
@@ -53,7 +58,7 @@ package $GROUP.$ARTIFACT;
 import org.testng.annotations.Test;
 
 @Test
-public class AppTest{
+public class MainTest{
 
 }
 EOF
@@ -73,7 +78,7 @@ echo "Initializing git repository and creating first commit.."
 cd "$NAME" || exit
 git init
 git add .
-git commit -m "initialize commit"
+git commit -m "Initialize commit"
 
 echo "Opening project with Intellij Idea.."
 

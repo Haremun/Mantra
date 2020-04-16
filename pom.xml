@@ -18,20 +18,22 @@
     <maven.compiler.target>${project.java.version}</maven.compiler.target>
     <maven.compiler.encoding>${project.build.sourceEncoding}</maven.compiler.encoding>
     <maven.resources.encoding>${project.build.sourceEncoding}</maven.resources.encoding>
-    <version.maven>3.5.3</version.maven>
+    <version.plugin.maven.enforcer>3.0.0-M3</version.plugin.maven.enforcer>
+    <version.plugin.maven.jar>3.2.0</version.plugin.maven.jar>
+    <version.maven>3.6.2</version.maven>
+    <version.testng>7.1.0</version.testng>
   </properties>
 
   <dependencies>
     <dependency>
       <groupId>org.testng</groupId>
       <artifactId>testng</artifactId>
-      <version>7.0.0</version>
+      <version>${version.testng}</version>
       <scope>test</scope>
     </dependency>
  </dependencies>
 
   <build>
-    <pluginManagement>
       <plugins>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -54,8 +56,9 @@
           </executions>
         </plugin>
       	<plugin>
+          <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-jar-plugin</artifactId>
-          <version>3.0.2</version>
+          <version>${version.plugin.maven.jar}</version>
           <configuration>
             <archive>
               <manifest>
@@ -65,7 +68,6 @@
           </configuration>
         </plugin>
       </plugins>
-    </pluginManagement>
   </build>
 </project>
 
