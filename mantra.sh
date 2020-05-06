@@ -12,9 +12,9 @@ echo "Generating project $NAME with groupId $GROUP, version $VERSION.."
 echo "Creating folder structure.."
 
 mkdir -p "$NAME"/src/{main,test}/{java,resources}/"$GROUP_PATH"/"$ARTIFACT" 
-touch "$NAME"/src/main/java/"$GROUP_PATH"/"$ARTIFACT"/App.java
+touch "$NAME"/src/main/java/"$GROUP_PATH"/"$ARTIFACT"/Main.java
 #mkdir "$NAME"/src/{main,test}/resources
-touch "$NAME"/src/test/java/"$GROUP_PATH"/"$ARTIFACT"/AppTest.java
+touch "$NAME"/src/test/java/"$GROUP_PATH"/"$ARTIFACT"/MainTest.java
 
 echo "Generating pom.xml.."
 
@@ -43,7 +43,7 @@ To run project you have to use:
 
     java -jar target/$ARTIFACT-?.?.jar
 EOF
-cat << EOF > "$NAME"/src/main/java/"$GROUP_PATH"/"$ARTIFACT"/App.java
+cat << EOF > "$NAME"/src/main/java/"$GROUP_PATH"/"$ARTIFACT"/Main.java
 package $GROUP.$ARTIFACT;
 
 public class Main{
@@ -52,7 +52,7 @@ public class Main{
 	}
 }
 EOF
-cat << EOF > "$NAME"/src/test/java/"$GROUP_PATH"/"$ARTIFACT"/AppTest.java
+cat << EOF > "$NAME"/src/test/java/"$GROUP_PATH"/"$ARTIFACT"/MainTest.java
 package $GROUP.$ARTIFACT;
 
 import org.testng.annotations.Test;
